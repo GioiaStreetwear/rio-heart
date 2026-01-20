@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gioia mundo</title>
+  <meta name="description" content="Gioia mundo — wereldse joy, minimalistisch design." />
+  <style>
+    :root{
+      --bg:#0b0c10; --text:#f5f7ff; --muted:#b8bfd8; --line:#232843;
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 20% 10%, rgba(124,92,255,.22), transparent 60%),
+        radial-gradient(700px 500px at 90% 20%, rgba(46,229,157,.14), transparent 55%),
+        linear-gradient(180deg, #070810, var(--bg));
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:22px}
+    .shell{
+      display:grid; gap:14px;
+      grid-template-columns:1.35fr .65fr;
+      min-height:calc(100vh - 44px);
+    }
+    @media (max-width: 920px){ .shell{grid-template-columns:1fr} }
+
+    .card{
+      background: rgba(18,20,32,.72);
+      border:1px solid rgba(35,40,67,.75);
+      border-radius: 26px;
+      overflow:hidden;
+    }
+
+    .mapWrap{position:relative; min-height:520px;}
+    .mapWrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+
+    .overlay{
+      position:absolute; left:14px; top:14px; right:14px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+      pointer-events:none;
+      z-index:3;
+    }
+
+    .badge{
+      pointer-events:auto;
+      padding:9px 12px; border-radius:999px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.16);
+      backdrop-filter: blur(10px);
+      font-weight:800; font-size:13px;
+      color:rgba(245,247,255,.92);
+    }
+
+    .btn{
+      pointer-events:auto;
+      padding:9px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+      color:rgba(245,247,255,.92);
+      font-weight:800; font-size:13px;
+      text-decoration:none;
+      display:inline-flex; gap:8px; align-items:center;
+    }
+
+    .side{padding:18px; display:grid; gap:14px; align-content:start}
+    .logo{
+      letter-spacing:.38em;
+      font-weight:500;
+      font-size:18px;
+      color:rgba(245,247,255,.92);
+    }
+    .muted{color:var(--muted); line-height:1.7}
+    .small{font-size:13px}
+    .pill{
+      padding:9px 12px; border-radius:999px;
+      border:1px solid rgba(35,40,67,.9);
+      background: rgba(11,12,16,.35);
+      color: var(--muted);
+      font-weight:800; font-size:13px;
+      width:fit-content;
+    }
+    .divider{height:1px; background: rgba(35,40,67,.65); margin:8px 0}
+
+    .fallback{
+      border:1px dashed rgba(35,40,67,.9);
+      border-radius: 16px;
+      padding:12px;
+      color:var(--muted);
+    }
+
+    /* Subtiele “loaded” hint; geen echte detectie mogelijk door cross-origin,
+       maar maakt UX netter als Maps traag is */
+    .mapLoading{
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      color:rgba(184,191,216,.75);
+      font-weight:800;
+      letter-spacing:.06em;
+      background: radial-gradient(600px 320px at 30% 20%, rgba(124,92,255,.12), transparent 60%),
+                  radial-gradient(500px 300px at 80% 20%, rgba(46,229,157,.10), transparent 55%),
+                  rgba(11,12,16,.35);
+      z-index:2;
+      p
