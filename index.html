@@ -174,7 +174,7 @@
           <a class="btn" id="openMapsBtn" target="_blank" rel="noopener">🗺️ Open Maps</a>
         </div>
 
-        <!-- Satellite map (address-based) -->
+        <!-- Satellite map via COORDINATES (no world map) -->
         <iframe id="mapFrame"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade">
@@ -185,6 +185,12 @@
         <a class="cta" id="streetBtn" target="_blank" rel="noopener">
           👣 Klik hier om de plek van de graffiti in Street View te zien
         </a>
+
+        <p class="note">
+          Turn around and walk up in the street. You will find the tag on your right. Enjoy.
+        </p>
+      </div>
+    </section>
 
     <!-- RIGHT: INFO + INSTAGRAM -->
     <aside class="card side">
@@ -224,24 +230,30 @@
 </main>
 
 <script>
-  // ✅ NEW LOCATION
+  // ✅ NEW LOCATION (display text)
   const address = "962 R. Alm. Alexandrino, Rio de Janeiro, Brazil";
-  const q = encodeURIComponent(address);
+
+  // ✅ COORDINATES (exact map + best QR)
+  const lat = -22.9234127;
+  const lng = -43.1876138;
+  const z = 19;
 
   // Links
-  const openMapsUrl   = `https://www.google.com/maps/search/?api=1&query=${q}`;
-  const streetViewUrl = `https://www.google.com/maps/@?api=1&map_action=pano&query=${q}`;
+  const openMapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
 
-  // Satellite embed
-  const mapEmbedUrl   = `https://www.google.com/maps?output=embed&z=19&t=k&q=${q}`;
+  // Street View (robust)
+  const streetViewUrl = `https://www.google.com/maps?layer=c&cbll=${lat},${lng}&cbp=11,0,0,0,0`;
+
+  // Satellite embed (exact)
+  const mapEmbedUrl = `https://www.google.com/maps?output=embed&z=${z}&t=k&ll=${lat},${lng}`;
 
   // UI
   document.getElementById("badgeText").textContent = `📍 ${address}`;
-  document.getElementById("addrText").textContent = address;
+  document.getElementById("addrText").textContent = `${address} — ${lat}, ${lng}`;
 
   document.getElementById("openMapsBtn").href = openMapsUrl;
-  document.getElementById("streetBtn").href   = streetViewUrl;
-  document.getElementById("mapFrame").src     = mapEmbedUrl;
+  document.getElementById("streetBtn").href = streetViewUrl;
+  document.getElementById("mapFrame").src = mapEmbedUrl;
 </script>
 </body>
 </html>
