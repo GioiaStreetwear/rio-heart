@@ -1,108 +1,253 @@
 <!doctype html>
-<html lang="nl">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gioia mundo</title>
-  <meta name="description" content="Gioia mundo — wereldse joy, minimalistisch design." />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Gioia Mundo</title>
+  <meta name="description" content="Gioia Mundo — street art origins." />
+
+  <!-- Montserrat Light -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#0b0c10; --text:#f5f7ff; --muted:#b8bfd8; --line:#232843;
-      --radius:22px;
+      --bg:#0b0c10;
+      --text:#f5f7ff;
+      --muted:#b8bfd8;
+      --line:#232843;
+      --card: rgba(18,20,32,.75);
+      --glass: rgba(0,0,0,.40);
     }
     *{box-sizing:border-box}
     body{
-      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--text);
       background:
         radial-gradient(900px 500px at 20% 10%, rgba(124,92,255,.22), transparent 60%),
         radial-gradient(700px 500px at 90% 20%, rgba(46,229,157,.14), transparent 55%),
-        linear-gradient(180deg, #070810, var(--bg));
+        linear-gradient(180deg,#070810,var(--bg));
     }
-    .wrap{max-width:1100px; margin:0 auto; padding:22px}
-    .shell{
-      display:grid; gap:14px;
-      grid-template-columns:1.35fr .65fr;
-      min-height:calc(100vh - 44px);
+
+    .wrap{max-width:1200px;margin:0 auto;padding:24px}
+    .layout{
+      display:grid;
+      gap:20px;
+      grid-template-columns: 640px 1fr;
+      align-items:start;
     }
-    @media (max-width: 920px){ .shell{grid-template-columns:1fr} }
+    @media(max-width:960px){
+      .layout{grid-template-columns:1fr}
+    }
 
     .card{
-      background: rgba(18,20,32,.72);
-      border:1px solid rgba(35,40,67,.75);
-      border-radius: 26px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:26px;
       overflow:hidden;
     }
 
-    .mapWrap{position:relative; min-height:520px;}
-    .mapWrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+    /* MAP */
+    .mapCard{padding:14px}
+    .map{
+      position:relative;
+      height:520px;
+      border-radius:18px;
+      overflow:hidden;
+    }
+    .map iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
 
-    .overlay{
-      position:absolute; left:14px; top:14px; right:14px;
-      display:flex; gap:10px; flex-wrap:wrap;
-      align-items:center; justify-content:space-between;
+    .mapOverlay{
+      position:absolute;
+      left:14px; right:14px; top:14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
       pointer-events:none;
-      z-index:3;
+      z-index:2;
     }
 
     .badge{
       pointer-events:auto;
-      padding:9px 12px; border-radius:999px;
-      background: rgba(0,0,0,.35);
-      border:1px solid rgba(255,255,255,.16);
+      padding:10px 14px;
+      border-radius:999px;
+      background:var(--glass);
+      border:1px solid rgba(255,255,255,.14);
       backdrop-filter: blur(10px);
-      font-weight:800; font-size:13px;
-      color:rgba(245,247,255,.92);
+      font-weight:800;
+      font-size:13px;
+      max-width:75%;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
     .btn{
       pointer-events:auto;
-      padding:9px 12px; border-radius:999px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(0,0,0,.35);
       border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.35);
       backdrop-filter: blur(10px);
-      color:rgba(245,247,255,.92);
-      font-weight:800; font-size:13px;
+      color:var(--text);
+      font-weight:800;
+      font-size:13px;
       text-decoration:none;
-      display:inline-flex; gap:8px; align-items:center;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
     }
 
-    .side{padding:18px; display:grid; gap:14px; align-content:start}
+    .ctaWrap{
+      margin-top:14px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+      justify-content:space-between;
+    }
+
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:14px 18px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#ffffff,#eaeaff);
+      color:#000;
+      font-weight:800;
+      font-size:14px;
+      text-decoration:none;
+      box-shadow:0 12px 40px rgba(124,92,255,.25);
+    }
+
+    .note{
+      font-size:13px;
+      color:var(--muted);
+      margin:0;
+      max-width:420px;
+      line-height:1.6;
+    }
+
+    /* INFO */
+    .side{padding:22px;display:grid;gap:16px}
     .logo{
-      letter-spacing:.38em;
-      font-weight:500;
+      font-family:'Montserrat',sans-serif;
+      font-weight:300;
+      letter-spacing:.75em;
+      text-transform:uppercase;
       font-size:18px;
-      color:rgba(245,247,255,.92);
     }
-    .muted{color:var(--muted); line-height:1.7}
-    .small{font-size:13px}
-    .pill{
-      padding:9px 12px; border-radius:999px;
-      border:1px solid rgba(35,40,67,.9);
-      background: rgba(11,12,16,.35);
-      color: var(--muted);
-      font-weight:800; font-size:13px;
+    .text{color:var(--muted);line-height:1.75;margin:0}
+    .coords{
       width:fit-content;
-    }
-    .divider{height:1px; background: rgba(35,40,67,.65); margin:8px 0}
-
-    .fallback{
-      border:1px dashed rgba(35,40,67,.9);
-      border-radius: 16px;
-      padding:12px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      font-size:13px;
       color:var(--muted);
     }
+    .divider{height:1px;background:var(--line);margin:8px 0}
 
-    /* Subtiele “loaded” hint; geen echte detectie mogelijk door cross-origin,
-       maar maakt UX netter als Maps traag is */
-    .mapLoading{
-      position:absolute; inset:0;
-      display:flex; align-items:center; justify-content:center;
-      color:rgba(184,191,216,.75);
-      font-weight:800;
-      letter-spacing:.06em;
-      background: radial-gradient(600px 320px at 30% 20%, rgba(124,92,255,.12), transparent 60%),
-                  radial-gradient(500px 300px at 80% 20%, rgba(46,229,157,.10), transparent 55%),
-                  rgba(11,12,16,.35);
-      z-index:2;
-      p
+    .insta{max-width:420px}
+  </style>
+</head>
+
+<body>
+<main class="wrap">
+  <div class="layout">
+
+    <!-- LEFT: MAP -->
+    <section class="card mapCard">
+      <div class="map">
+        <div class="mapOverlay">
+          <div class="badge" id="badgeText">📍</div>
+          <a class="btn" id="openMapsBtn" target="_blank" rel="noopener">🗺️ Open Maps</a>
+        </div>
+
+        <!-- Satellite map (address-based) -->
+        <iframe id="mapFrame"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+      <div class="ctaWrap">
+        <a class="cta" id="streetBtn" target="_blank" rel="noopener">
+          👣 Klik hier om de plek van de graffiti in Street View te zien
+        </a>
+
+        <p class="note">
+          Turn around and walk up in the street. You will find the tag on your right. Enjoy.
+        </p>
+      </div>
+    </section>
+
+    <!-- RIGHT: INFO + INSTAGRAM -->
+    <aside class="card side">
+      <div class="logo">GIOIA MUNDO</div>
+
+      <p class="text">
+        You find the most amazing art on the streets all over the world.<br><br>
+        We simply love it and want to expose the art more by connecting it with streetwear.<br><br>
+        On the map you see the exact spot where the street art of your T is born,
+        and below you find the artist who created it.
+      </p>
+
+      <span class="coords" id="addrText"></span>
+
+      <div class="divider"></div>
+
+      <!-- NEW INSTAGRAM POST -->
+      <div class="insta">
+        <blockquote class="instagram-media"
+          data-instgrm-permalink="https://www.instagram.com/p/CMpGlgBsIfA/"
+          data-instgrm-version="14"
+          style="background:#fff;border-radius:14px;border:0;margin:0;max-width:100%;">
+        </blockquote>
+        <script async src="https://www.instagram.com/embed.js"></script>
+
+        <p style="margin-top:10px;font-size:13px;color:#b8bfd8;">
+          Not loading? Open directly on
+          <a href="https://www.instagram.com/p/CMpGlgBsIfA/"
+             target="_blank" rel="noopener" style="color:#0095f6;">
+            Instagram
+          </a>.
+        </p>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<script>
+  // ✅ NEW LOCATION
+  const address = "962 R. Alm. Alexandrino, Rio de Janeiro, Brazil";
+  const q = encodeURIComponent(address);
+
+  // Links
+  const openMapsUrl   = `https://www.google.com/maps/search/?api=1&query=${q}`;
+  const streetViewUrl = `https://www.google.com/maps/@?api=1&map_action=pano&query=${q}`;
+
+  // Satellite embed
+  const mapEmbedUrl   = `https://www.google.com/maps?output=embed&z=19&t=k&q=${q}`;
+
+  // UI
+  document.getElementById("badgeText").textContent = `📍 ${address}`;
+  document.getElementById("addrText").textContent = address;
+
+  document.getElementById("openMapsBtn").href = openMapsUrl;
+  document.getElementById("streetBtn").href   = streetViewUrl;
+  document.getElementById("mapFrame").src     = mapEmbedUrl;
+</script>
+</body>
+</html>
